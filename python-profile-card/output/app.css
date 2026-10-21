@@ -1,0 +1,54 @@
+/* ==========================================================
+   app.css - สไตล์ของหน้าหลักและปุ่มสลับโหมด
+   ========================================================== */
+
+/* ล้างระยะขอบเริ่มต้นของเบราว์เซอร์ */
+body { margin: 0; }
+
+/* กรอบหน้าหลัก */
+.app {
+  min-height: 100vh;         /* สูงเต็มจออย่างน้อย */
+  padding: 32px;
+  box-sizing: border-box;
+  font-family: "Sarabun", "Noto Sans Thai", sans-serif;
+  transition: background 0.3s ease, color 0.3s ease; /* สลับโหมดแบบนุ่มนวล */
+}
+
+/* ธีมของหน้า */
+.app--light { background: #f1f3f5; color: #222222; }
+.app--dark  { background: #14151f; color: #f1f1f1; }
+
+/* แถบหัวเรื่อง: ชื่ออยู่ซ้าย ปุ่มอยู่ขวา */
+.app__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.app__header h1 { margin: 0; }
+
+/* ปุ่มสลับโหมด */
+.theme-toggle {
+  padding: 10px 20px;
+  border: 2px solid currentColor;  /* กรอบสีเดียวกับตัวอักษร */
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.theme-toggle:hover {
+  background: rgba(128, 128, 128, 0.2);
+  transform: scale(1.05);
+}
+
+/* กล่องรวมการ์ด: เรียงเป็นแถว ขึ้นบรรทัดใหม่เมื่อจอแคบ */
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 32px;
+}

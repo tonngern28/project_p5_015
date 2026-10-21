@@ -1,0 +1,48 @@
+/* ==========================================================
+   profile_card.css - สไตล์ของการ์ดแนะนำตัว
+   ========================================================== */
+
+/* ---------- 1) โครงสร้างหลักของการ์ด ---------- */
+.profile-card {
+  /* ตัวแปร CSS เก็บสีหลักของการ์ด (ค่าเริ่มต้นเป็นสีแดง)
+     สีจริงของแต่ละใบจะถูกกำหนดใน colors.css ที่ Python สร้างให้ */
+  --accent: #ff6b6b;
+
+  width: 220px;                                 /* ความกว้างการ์ด */
+  padding: 24px 16px;                           /* ระยะห่างภายในการ์ด */
+  border-radius: 16px;                          /* มุมโค้งมน */
+  text-align: center;                           /* จัดกึ่งกลาง */
+  border-top: 8px solid var(--accent);          /* แถบสีด้านบน */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);   /* เงาบางๆ */
+
+  /* ให้การยกการ์ดและการสลับโหมดเปลี่ยนแบบนุ่มนวล */
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    background 0.3s ease, color 0.3s ease;
+}
+
+/* ---------- 2) เอฟเฟกต์ hover: การ์ดลอยขึ้น ---------- */
+.profile-card:hover {
+  transform: translateY(-8px);                  /* ยกขึ้น 8 พิกเซล */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);   /* เงาเข้มขึ้น */
+}
+
+/* ---------- 3) (Bonus) ธีมสว่าง / มืด ---------- */
+.theme-light { background: #ffffff; color: #222222; }
+.theme-dark  { background: #2b2d42; color: #f1f1f1; }
+
+/* ---------- 4) ส่วนประกอบภายในการ์ด ---------- */
+.profile-card__avatar { font-size: 56px; }
+.profile-card__name   { margin: 8px 0 4px; font-size: 1.25rem; }
+.profile-card__role   { margin: 0 0 16px; opacity: 0.75; }
+
+/* ---------- 5) (Bonus) ปุ่มทักทาย ---------- */
+.profile-card__btn {
+  background: var(--accent);   /* ใช้สีหลักของการ์ด */
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;        /* ทรงแคปซูล */
+  cursor: pointer;
+  font-size: 1rem;
+}
+.profile-card__btn:hover { filter: brightness(1.1); } /* สว่างขึ้นเมื่อชี้ */

@@ -1,0 +1,45 @@
+{# CartPage: รายการในตะกร้า + ราคารวม + ปุ่มสั่งซื้อ #}
+{% extends "base.html" %}
+{% block title %}ตะกร้า · Mini Shop{% endblock %}
+{% block content %}
+  <h1>ตะกร้าสินค้า</h1>
+
+  {% if not items %}
+    <p>ตะกร้าว่างเปล่า <a href="{{ url_for('shop_page') }}">ไปเลือกสินค้า</a></p>
+  {% else %}
+    {% for item in items %}
+      <div class="row">
+        <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
+        <div class="info">
+          <strong>{{ item.title }}</strong>
+          <div>฿{{ "{:,.2f}".format(item.price) }} / ชิ้น</div>
+        </div>
+
+        {# (Bonus) ปุ่ม − จำนวน + #}
+        <div class="qty">
+          <form method="post" action="{{ url_for('decrease', product_id=item.id) }}">
+            <button class="btn small">−</button>
+          </form>
+          <span>{{ item.quantity }}</span>
+          <form method="post" action="{{ url_for('increase', product_id=item.id) }}">
+            <button class="btn small">+</button>
+          </form>
+        </div>
+
+        <div class="subtotal">฿{{ "{:,.2f}".format(item.price * item.quantity) }}</div>
+
+        <form method="post" action="{{ url_for('remove_from_cart', product_id=item.id) }}">
+          <button class="btn danger small">ลบ</button>
+        </form>
+      </div>
+    {% endfor %}
+
+    <div class="summary">
+      <p>จำนวนรวม: <strong>{{ cart_ctx.total_items }}</strong> ชิ้น</p>
+      <p class="total">ราคารวม: ฿{{ "{:,.2f}".format(cart_ctx.total_price) }}</p>
+      <form method="post" action="{{ url_for('checkout') }}">
+        <button class="btn">สั่งซื้อ</button>
+      </form>
+    </div>
+  {% endif %}
+{% endblock %}

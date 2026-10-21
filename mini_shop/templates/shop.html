@@ -1,0 +1,19 @@
+{# ShopPage: แสดงสินค้าที่ดึงจาก API #}
+{% extends "base.html" %}
+{# with context = ให้ macro เห็น to_thb ที่ฉีดโดย context_processor #}
+{% from "_macros.html" import product_card with context %}
+{% block content %}
+  <h1>สินค้าแนะนำ</h1>
+
+  {# กรณี API ล้มเหลว แสดง error #}
+  {% if error %}
+    <div class="error">{{ error }}</div>
+  {% endif %}
+
+  <section class="grid">
+    {# วนลูปแสดงการ์ดสินค้า (ใน Jinja ไม่ต้องใช้ key prop แบบ React) #}
+    {% for p in products %}
+      {{ product_card(p) }}
+    {% endfor %}
+  </section>
+{% endblock %}

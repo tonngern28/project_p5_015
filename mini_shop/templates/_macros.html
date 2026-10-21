@@ -1,0 +1,19 @@
+{# ============================================================
+   _macros.html : "คอมโพเนนต์" ที่นำกลับมาใช้ซ้ำได้ (เทียบเท่า ProductCard)
+   ============================================================ #}
+
+{# ProductCard: การ์ดสินค้า 1 ใบ พร้อมปุ่ม "เพิ่มลงตะกร้า"
+   รับ product (ข้อมูลดิบจาก API ราคาเป็น USD) แล้วแปลงเป็นบาทตอนแสดง #}
+{% macro product_card(product) %}
+  <article class="card">
+    {# loading="lazy" = โหลดรูปเมื่อเลื่อนมาถึง (ช่วยให้หน้าเร็วขึ้น) #}
+    <a href="{{ url_for('product_page', product_id=product.id) }}">
+      <img src="{{ product.image }}" alt="{{ product.title }}" loading="lazy">
+    </a>
+    <h3>{{ product.title }}</h3>
+    <p class="price">฿{{ "{:,.2f}".format(to_thb(product.price)) }}</p>
+    <form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+      <button class="btn">เพิ่มลงตะกร้า</button>
+    </form>
+  </article>
+{% endmacro %}

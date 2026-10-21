@@ -1,0 +1,20 @@
+{# (Bonus) หน้ารายละเอียดสินค้า /product/<id> #}
+{% extends "base.html" %}
+{% block content %}
+  {% if error %}
+    <div class="error">{{ error }}</div>
+  {% else %}
+    <div class="detail">
+      <img src="{{ product.image }}" alt="{{ product.title }}">
+      <div>
+        <h1>{{ product.title }}</h1>
+        <p class="muted">หมวดหมู่: {{ product.category }}</p>
+        <p>{{ product.description }}</p>
+        <p class="price">฿{{ "{:,.2f}".format(to_thb(product.price)) }}</p>
+        <form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+          <button class="btn">เพิ่มลงตะกร้า</button>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
